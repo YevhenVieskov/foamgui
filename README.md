@@ -1,0 +1,2 @@
+# foamgui
+openfoam pyQt GUI
