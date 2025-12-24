@@ -1,0 +1,121 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+norm_U_L1
+{
+    type            norm;
+    libs            ( fieldFunctionObjects );
+    field           U;
+    norm            L1;
+    result          norm_U_L1;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+norm_U_L2
+{
+    type            norm;
+    libs            ( fieldFunctionObjects );
+    field           U;
+    norm            L2;
+    result          norm_U_L2;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+norm_U_Lp
+{
+    type            norm;
+    libs            ( fieldFunctionObjects );
+    field           U;
+    norm            Lp;
+    result          norm_U_Lp;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    p               3;
+}
+
+norm_U_max
+{
+    type            norm;
+    libs            ( fieldFunctionObjects );
+    field           U;
+    norm            max;
+    result          norm_U_max;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+norm_U_composite
+{
+    type            norm;
+    libs            ( fieldFunctionObjects );
+    field           U;
+    norm            composite;
+    result          norm_U_composite;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    divisor         constant 2;
+}
+
+norm_k_field
+{
+    type            norm;
+    libs            ( fieldFunctionObjects );
+    field           k;
+    norm            divisorField;
+    result          norm_k_field;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    divisorField    p;
+}
+
+
+// ************************************************************************* //

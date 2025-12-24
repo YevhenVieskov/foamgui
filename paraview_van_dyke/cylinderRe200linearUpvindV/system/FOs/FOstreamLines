@@ -1,0 +1,54 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2506                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+
+streamLine1
+{
+    // Mandatory entries (unmodifiable)
+    type            streamLine;
+    libs            (fieldFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    U               U;
+    fields          (U, p);
+    setFormat       vtk;
+    direction       bidirectional;
+    lifeTime        50;
+    cloud           particleTracks;
+    seedSampleSet
+    {
+        type        uniform;
+        axis        y;
+        start       (0.06 -0.04 0.0);
+        end         (0.06  0.04 0.0);
+        nPoints     100;
+    }
+
+    // Optional entries (runtime modifiable)
+    //bounds          (0.2 -10 -10)(0.22 10 10);
+    //trackLength     1e-3;
+    nSubCycle       1;
+    interpolationScheme cellPoint;
+
+    // Deprecated
+    // trackForward true;
+
+    // Optional (inherited) entries
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         500;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.01;
+}
+
+
+// ************************************************************************* //

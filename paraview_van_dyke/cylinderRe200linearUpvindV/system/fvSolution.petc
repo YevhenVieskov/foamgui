@@ -1,0 +1,204 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |				
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10                                  	
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    //Valid symmetric matrix smoother types :
+    //6(DIC DICGaussSeidel FDIC GaussSeidel nonBlockingGaussSeidel symGaussSeidel)
+    "pcorr.*"
+    {                
+        solver             petsc;
+        preconditioner     petsc;
+
+        petsc
+        {
+            options
+            {
+                ksp_type gmres;
+                pc_type bjacobi;
+                ksp_cg_single_reduction  true;
+                ksp_norm_type none;
+
+// With or without hypre
+#if 0
+                pc_type  hypre;
+                pc_hypre_type boomeramg;
+                pc_hypre_boomeramg_max_iter "1";
+                pc_hypre_boomeramg_strong_threshold "0.25";
+                pc_hypre_boomeramg_grid_sweeps_up "1";
+                pc_hypre_boomeramg_grid_sweeps_down "1";
+                pc_hypre_boomeramg_agg_nl "1";
+                pc_hypre_boomeramg_agg_num_paths "1";
+                pc_hypre_boomeramg_max_levels "25";
+                pc_hypre_boomeramg_coarsen_type HMIS;
+                pc_hypre_boomeramg_interp_type ext+i;
+                pc_hypre_boomeramg_P_max "1";
+                pc_hypre_boomeramg_truncfactor "0.3";
+#else
+                pc_type bjacobi;
+                sub_pc_type ilu;
+#endif
+            }
+
+            caching
+            {
+                matrix
+                {
+                    update always;
+                }
+
+                preconditioner
+                {
+                    update always;
+                }
+            }
+        }
+        tolerance       1e-4;
+        relTol          0;  //0.05
+
+        //maxIter         100;    
+    }
+
+    p
+    {
+        $pcorr;
+        tolerance        1e-6;
+        relTol           0.01;
+    }
+
+    pFinal
+    {
+        $p;
+        tolerance        1e-6;
+        relTol           0.0;
+    }
+    
+    //Valid asymmetric matrix smoother types :
+    //5(DILU DILUGaussSeidel GaussSeidel nonBlockingGaussSeidel symGaussSeidel)
+    "(U|k|omega|gammaInt|ReThetat)"
+    {
+        solver          petsc;
+        preconditioner  petsc;
+
+        petsc
+        {
+            options
+            {
+                ksp_type gmres;
+                pc_type bjacobi;
+                sub_pc_type ilu;
+                ksp_cg_single_reduction true;
+            }
+
+            caching
+            {
+                matrix
+                {
+                    update always;
+                }
+
+                preconditioner
+                {
+                    update always;
+                }
+            }
+        }
+    }
+
+    "(U|k|omega|gammaInt|ReThetat)Final"
+    {
+        $U;
+        tolerance       1e-06;
+        relTol          0.0;
+        minIter         10;
+    }
+    
+    //Valid symmetric matrix smoother types :
+    //6(DIC DICGaussSeidel FDIC GaussSeidel nonBlockingGaussSeidel symGaussSeidel)
+    cellDisplacement
+    {               
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-4;
+        relTol          0;  //0.05
+        minIter		3;
+        //maxIter         100;
+    }
+}
+
+PIMPLE
+{
+    //If enable you will need to add UFinal
+    momentumPredictor yes;
+
+    //Use consistent formulation of SIMPLE - More robust
+    consistent 		yes;
+    turbOnFinalIterOnly 	no;
+    //If you set nOuterCorrectors to 1 is equivalent to piso
+    nOuterCorrectors 15;
+
+    nCorrectors 2; //2-4
+    nNonOrthogonalCorrectors 2; //1-2
+
+    checkMeshCourantNo	yes;
+
+   
+    residualControl
+    {
+        U
+        {
+            tolerance  1e-6;
+            relTol      0;
+        }
+
+        p
+        {
+            tolerance  1e-5;//1e-5
+            relTol      0;
+        }
+
+        "(k|omega|gammaInt|ReThetat)"
+        {
+            tolerance  1e-4;
+            relTol      0;
+        }
+
+
+    }
+
+}
+
+relaxationFactors
+{
+    fields
+    {
+        p      0.3; // ensure diagonal equality 0.9 0.3
+        pFinal 0.3;
+    }
+
+    equations
+    {
+        U 0.9;
+        UFinal 0.9;
+
+        "k|omega|gammaInt|ReThetat"          0.5; // ensure diagonal equality 0.9 0.3
+        "(k|omega|gammaInt|ReThetat)Final"   0.5;  //1
+    }
+}
+
+cache
+{
+    grad(U);
+}

@@ -1,0 +1,125 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |				
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10                                  	
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs
+(
+  "petscFoam"
+);
+
+application     pimpleFoam;
+
+startFrom       startTime;
+//startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+//stopAt          writeNow;
+
+endTime          400; //10; //20-10
+
+deltaT          0.0625; //1.0e-5
+
+writeControl    adjustableRunTime;
+/*
+adjustableRunTime
+clockTime
+cpuTime
+runTime
+timeStep
+*/
+
+
+writeInterval   0.5;
+
+
+purgeWrite      100;
+
+writeFormat     binary;
+
+writePrecision  8;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+adjustTimeStep  yes;
+
+maxCo           40;
+
+maxDeltaT      0.0625;
+
+functions
+{
+    // field function objects
+    
+    fileUpdate1
+    {
+        type              timeActivatedFileUpdate;
+        libs              (utilityFunctionObjects);
+        //writeControl      timeStep;
+        //writeInterval     1;
+        fileToUpdate      "./system/fvSolution";
+        timeVsFile
+        (
+            (-1   "./system/fvSolution.petc")
+            (1 "./system/fvSolution.petc")
+        );    
+    }
+    
+    fileUpdate2
+    {
+        type              timeActivatedFileUpdate;
+        libs              ("libutilityFunctionObjects.so");
+        //writeControl      timeStep;
+        //writeInterval     1;
+        fileToUpdate      "./system/fvSchemes";
+        timeVsFile
+        (
+            (-1   "./system/fvSchemes.final")  //<system>/fvSchemes.init
+            (1 "./system/fvSchemes.final")
+        );    
+    }
+    
+    #include "FOs/FOforces"
+    #include "FOs/FOQ"
+    #include "FOs/FOLambda2"
+    #include "FOs/FOLambVector"
+    #include "FOs/FOvorticity"
+    #include "FOs/FOpressure"
+    #include "FOs/FOwallShearStress"
+    #include "FOs/FOyPlus"
+    #include "FOs/FOturbulenceFields"
+    //#include "FOs/FOcuttingPlane"
+    //#include "FOs/FOprobesCylinder"
+    //#include "FOs/FOmassFlow"
+    //#include "FOs/FOsolverInfo"
+    //#include "FOs/FOstreamFunction"
+    //#include "FOs/FOminMax"
+    //#include "FOs/FOfoamReport"
+    //#include "FOs/FOgraphFunctionObject"
+
+
+};
+
+
+// ************************************************************************* //
+
+

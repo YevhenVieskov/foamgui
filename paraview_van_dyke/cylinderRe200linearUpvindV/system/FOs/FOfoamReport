@@ -1,0 +1,68 @@
+foamReport1
+{
+    type            foamReport;
+    libs            (utilityFunctionObjects);
+
+    writeControl    writeTime;
+
+    //template        "<system>/myReportTemplate.md";
+    template          "<system>/myReportTemplate.md";
+
+    substitutions
+    {
+        timing1
+        {
+            type        fileRegEx;
+            path        "../../log.solver";
+
+            entries
+            {
+                executionTime "ExecutionTime = (.*) s  Clock.*";
+            }
+        }
+        divSchemes1
+        {
+            type        dictionaryValue;
+            path        "<system>/fvSchemes";
+
+            entries
+            {
+                divSchemes      "divSchemes";
+            }
+        }
+        fvSolution1
+        {
+            type        dictionaryValue;
+            path        "<system>/fvSolution";
+
+            entries
+            {
+                solver_p               "solvers/p/solver";
+                solver_p_tol           "solvers/p/tolerance";
+                solver_p_reltol        "solvers/p/relTol";
+                solver_U               "solvers/U/solver";
+                solver_U_tol           "solvers/U/tolerance";
+                solver_U_reltol        "solvers/U/relTol";
+                solver_k_tol           "solvers/k/tolerance";
+                solver_k_reltol        "solvers/k/relTol";
+                solver_omega_tol       "solvers/omega/tolerance";
+                solver_omega_reltol    "solvers/omega/relTol";
+                solver_ReThetat_tol    "solvers/ReThetat/tolerance";
+                solver_ReThetat_reltol "solvers/ReThetat/relTol";
+                solver_gammaInt_tol    "solvers/gammaInt/tolerance";
+                solver_gammaInt_reltol "solvers/gammaInt/relTol";
+            }
+        }
+        controlDict1
+        {
+            type        dictionaryValue;
+            path        "<system>/controlDict";
+
+            entries
+            {
+                initial_deltaT       "deltaT";
+            }
+        }
+    }
+}
+

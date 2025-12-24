@@ -1,0 +1,443 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+volFieldValue1_none_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       none;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_min_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       min;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_max_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       max;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_sum_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       sum;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_sumMag_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       sumMag;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_average_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       average;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_volAverage_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       volAverage;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_volIntegrate_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       volIntegrate;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_CoV_none
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       CoV;
+    regionType      all;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+volFieldValue1_min_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       min;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+volFieldValue1_max_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       max;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+volFieldValue1_sum_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       sum;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+volFieldValue1_sumMag_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       sumMag;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+volFieldValue1_average_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       average;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+volFieldValue1_volAverage_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       volAverage;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+volFieldValue1_volIntegrate_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       volIntegrate;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+volFieldValue1_CoV_none_cellzone
+{
+    type            volFieldValue;
+    libs            ( fieldFunctionObjects );
+    fields          ( p U );
+    operation       CoV;
+    regionType      cellZone;
+    postOperation   none;
+    weightField     none;
+    writeFields     true;
+    scalingFactor   1;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    name            zone1;
+}
+
+
+// ************************************************************************* //

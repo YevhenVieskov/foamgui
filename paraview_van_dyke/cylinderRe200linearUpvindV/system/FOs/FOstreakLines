@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2506                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+//https://www.cemf.ir/wp-content/uploads/2020/06/particle-Tracer.pdf
+
+/* --> FOAM FATAL ERROR: (openfoam-2412)
+[0] Not implemented
+[0] 
+[0]     From Foam::tmp<Foam::Field<Type> > Foam::coupledFvPatchField<Type>::snGrad() const [with Type = Foam::Vector<double>]
+[0]     in file lnInclude/coupledFvPatchField.H at line 170.
+
+don't work with symmetryPlane boundary condition
+*/
+
+tracks
+{
+    libs ("liblagrangianFunctionObjects.so");
+    type icoUncoupledKinematicCloud;
+    kinematicCloud kinematicCloud;
+
+    setFormat          vtk;
+    // Optional (inherited) entries
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         500;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.01;
+}
+
+
+
+
+// ************************************************************************* //

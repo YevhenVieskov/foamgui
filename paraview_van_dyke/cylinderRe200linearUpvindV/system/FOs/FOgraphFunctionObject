@@ -1,0 +1,112 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+residualGraph1
+{
+    type            graphFunctionObject;
+    libs            ( utilityFunctionObjects );
+    functions
+    {
+        Ux
+        {
+            object          solverInfo1;
+            entry           Ux_initial;
+        }
+        Uy
+        {
+            object          solverInfo1;
+            entry           Uy_initial;
+        }
+        Uz
+        {
+            object          solverInfo1;
+            entry           Uz_initial;
+        }
+        p
+        {
+            object          solverInfo1;
+            entry           gammaInt_initial;
+        }
+    }
+    logScaleX       no;
+    logScaleY       yes;
+    xlabel          "Iteration";
+    ylabel          "log10(Initial residual)";
+    writePrecision  6;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    writeTime;
+    writeInterval   -1;
+    startTime       0;
+    endTime         1300;
+}
+
+forceCoeffsGraph1
+{
+    type            graphFunctionObject;
+    libs            ( utilityFunctionObjects );
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    writeTime;
+    writeInterval   -1;
+    logScaleX       no;
+    logScaleY       no;
+    xlabel          "Iteration";
+    ylabel          "Coefficient";
+    yMin            -1;
+    yMax            1;
+    functions
+    {
+        Cd
+        {
+            object          forceCoeffs1;
+            entry           Cd;
+        }
+        Cd(f)
+        {
+            object          forceCoeffs1;
+            entry           Cd(f);
+        }
+        Cd(r)
+        {
+            object          forceCoeffs1;
+            entry           Cd(r);
+        }
+        Cl
+        {
+            object          forceCoeffs1;
+            entry           Cl;
+        }
+        Cl(f)
+        {
+            object          forceCoeffs1;
+            entry           Cl(f);
+            title           Cl(f);
+        }
+        Cl(r)
+        {
+            object          forceCoeffs1;
+            entry           Cl(r);
+            title           Cl(r);
+        }
+    }
+    startTime       0;
+    endTime         1300;
+    timeStart       0;
+    timeEnd         400;
+}
+
+
+// ************************************************************************* //

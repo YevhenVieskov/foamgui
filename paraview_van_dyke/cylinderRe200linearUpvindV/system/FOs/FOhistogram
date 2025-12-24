@@ -1,0 +1,54 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+histogram1
+{
+    type            histogram;
+    libs            ( fieldFunctionObjects );
+    field           p;
+    model           equalBinWidth;
+    nBins           100;
+    max             10;
+    min             -10;
+    writePrecision  6;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+histogram2
+{
+    type            histogram;
+    libs            ( fieldFunctionObjects );
+    field           p;
+    model           unequalBinWidth;
+    ranges          ( ( -10 -9 ) ( -9 -8 ) ( -8 -7 ) ( -7 -6 ) ( -6 -2 ) ( -2 0 ) ( 0 5 ) ( 5 10 ) );
+    writePrecision  6;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         500;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.01;
+}
+
+
+// ************************************************************************* //

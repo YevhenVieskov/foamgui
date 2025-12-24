@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+grad1
+{
+    type            grad;
+    libs            ( fieldFunctionObjects );
+    field           U;
+    result          gradU;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+grad2
+{
+    type            grad;
+    libs            ( fieldFunctionObjects );
+    field           phi;
+    result          gradPhi;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    endTime         1300;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+    timeEnd         400;
+}
+
+
+// ************************************************************************* //
