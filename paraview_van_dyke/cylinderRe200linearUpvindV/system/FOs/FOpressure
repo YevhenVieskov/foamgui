@@ -1,0 +1,98 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+pressure1
+{
+    type            pressure;
+    libs            ( fieldFunctionObjects );
+    mode            static;
+    U               U;
+    rho             rhoInf;
+    rhoInf          100000;
+    pRef            0;
+    result          staticP;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+pressure2
+{
+    type            pressure;
+    libs            ( fieldFunctionObjects );
+    mode            total;
+    U               U;
+    rho             rhoInf;
+    rhoInf          100000;
+    pRef            0;
+    result          totalP;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+pressure3
+{
+    type            pressure;
+    libs            ( fieldFunctionObjects );
+    mode            staticCoeff;
+    U               U;
+    rho             rhoInf;
+    rhoInf          100000;
+    pRef            0;
+    pInf            0;
+    UInf            ( 1 0 0 );
+    result          staticCoeffP;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+pressure4
+{
+    type            pressure;
+    libs            ( fieldFunctionObjects );
+    mode            totalCoeff;
+    U               U;
+    rho             rhoInf;
+    rhoInf          100000;
+    pRef            0;
+    pInf            0;
+    UInf            ( 0.05 0 0 );
+    result          totalCoeffP;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+
+// ************************************************************************* //

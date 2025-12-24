@@ -1,0 +1,27 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+turbulenceFields1
+{
+    type            turbulenceFields;
+    libs            ( fieldFunctionObjects );
+    fields          ( epsilon R L I nuTilda nuEff devReff );
+    field           R;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+
+// ************************************************************************* //

@@ -1,0 +1,31 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+log1
+{
+    type            log;
+    libs            ( fieldFunctionObjects );
+    field           k;
+    clip            0.001;
+    checkDimensions false;
+    scale           1;
+    offset          0;
+    result          logk;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  runTime;
+    executeInterval 1;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+
+// ************************************************************************* //

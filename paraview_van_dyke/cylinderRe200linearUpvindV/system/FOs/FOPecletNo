@@ -1,0 +1,30 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2506                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+PecletNo1
+{
+    type            PecletNo;
+    libs            ( fieldFunctionObjects );
+    rho             rho;
+    field           phi;
+    result          PecletNoField;
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         400;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeToFile     true;
+    useUserTime     true;
+    writeControl    adjustableRunTime;
+    writeInterval   0.5;
+}
+
+
+// ************************************************************************* //

@@ -1,0 +1,132 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear corrected;
+    grad(p)         cellLimited Gauss linear 1;
+    grad(U)         Gauss linear;
+}
+
+divSchemes
+{
+    default             none;
+    div(U)              Gauss linear;
+    div(phi,U)          Gauss upwind;
+    div(phi,k)          Gauss upwind;
+    div(phi,omega)      Gauss upwind;
+    div(phi,gammaInt)   Gauss upwind;
+    div(phi,ReThetat)   Gauss upwind;
+    
+    div(div(phi,U)) Gauss linear;
+    
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
+
+} 
+  
+laplacianSchemes
+{
+    default         Gauss linear limited corrected 0.5;
+    laplacian(diffusivity,cellDisplacement)  Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+wallDist
+{
+    method          meshWave;
+}
+
+oversetInterpolation
+{
+    method	      cellVolumeWeight;
+    //method          inverseDistance;
+    //method          leastSquares;
+
+    //searchBox           (0 0 0)(0.1 0.1 0.1);
+    // searchBoxDivisions  (130 130 1);
+    // holeLayers          4;
+    // useLayer            2;
+    //Default values are about holeLayers 4 - useLayer 1/2
+    //You need to optimize manually the best values for this case
+    //holeLayers          8;
+    //useLayer            4;
+
+
+    // The inverseDistance method uses a 'voxel' like search structure.
+    // Optionally specify the extent and number of divisions n.
+    // Note that it will allocate an array of nx*ny*nz. If not specified:
+    // - searchBox          : local mesh bounding box
+    // - searchBoxDivisions : root (2D) or cube-root(3D) of number of cells
+    //searchBox           (0 0 0)(0.01 0.01 0.01);
+    //searchBoxDivisions  (100 100 1);
+
+    //layerRelax 0.3;
+
+//Comment to get default values 4-1/2
+//Leave at least two fringes between holeLayers adn useLayer
+
+//blockMesh option 1
+    //holeLayers          8;
+    //useLayer            4;
+
+    //holeLayers          6;
+    //useLayer            4;
+
+    //holeLayers          5;
+    //useLayer            3;
+
+    //holeLayers          3;
+    //useLayer            1;
+
+//blockMesh option 2
+    //f4
+    //holeLayers          8;
+    //useLayer            6;
+
+    //f3-ani
+    //holeLayers          6;
+    //useLayer            4;
+
+    //f2
+    //holeLayers          4;
+    //useLayer            2;
+
+    //f1 commented
+}
+
+fluxRequired
+{
+    default         no;
+    pcorr           ;
+    p               ;
+}
+
+
+// ************************************************************************* //

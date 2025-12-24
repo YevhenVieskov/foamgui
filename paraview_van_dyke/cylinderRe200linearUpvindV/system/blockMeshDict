@@ -1,0 +1,151 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+
+
+
+R 0.5; // Inner radius
+Rg #eval "100*$R"; //Outer radius
+Ra #eval "sqrt(0.5)*$R"; //Inner arc interpolation point "0.7071*$R"
+Rga #eval "sqrt(0.5)*$Rg"; //Outer arc interpolation point "0.7071*$Rg"  sqrt(0.5)
+zmin -$R;
+zmax $R;
+
+
+xcells 30;
+ycells 250;
+zcells 1;
+stretch 180;
+
+vertices
+(  
+    //block0 vertices
+    (0 $R  $zmin) //0
+    (0 $Rg $zmin) //1
+    ($Rg 0 $zmin) //2
+    ($R 0 $zmin) //3   
+    (0 $R $zmax) //4
+    (0 $Rg $zmax) //5
+    ($Rg 0 $zmax) //6
+    ($R 0 $zmax) //7
+    //block1 new vertices
+    (0 -$R $zmin) //8   
+    (0 -$Rg $zmin) //9
+    (0 -$R $zmax) //10
+    (0 -$Rg $zmax) //11
+    //block3 new vertices
+    (-$R 0 $zmin) //12
+    (-$Rg 0 $zmin) //13
+    (-$R 0 $zmax) //14
+    (-$Rg 0 $zmax) //15    
+);
+
+
+blocks
+(
+    //block0
+    hex (0 3 2 1 4 7 6 5) ($xcells $ycells $zcells) simpleGrading (1 $stretch 1)
+    //block1
+    hex (3 8 9 2 7 10 11 6) ($xcells $ycells $zcells) simpleGrading (1 $stretch 1)
+    //block2
+    hex (8 12 13 9 10 14 15 11) ($xcells $ycells $zcells) simpleGrading (1 $stretch 1)
+    //block3
+    hex (12 0 1 13 14 4 5 15) ($xcells $ycells $zcells) simpleGrading (1 $stretch 1)    
+);
+
+edges
+(
+    //block0 arc
+    arc 1 2 ($Rga $Rga $zmin)
+    arc 0 3 ($Ra  $Ra  $zmin)
+    arc 5 6 ($Rga $Rga $zmax)
+    arc 4 7 ($Ra  $Ra  $zmax)
+
+    //block1 arc
+    arc 2 9  ($Rga -$Rga $zmin)
+    arc 3 8  ($Ra  -$Ra  $zmin)
+    arc 6 11 ($Rga -$Rga $zmax)
+    arc 7 10 ($Ra  -$Ra  $zmax)
+
+    //block2 arc
+    arc 9 13  (-$Rga -$Rga $zmin)
+    arc 8 12  (-$Ra  -$Ra  $zmin)
+    arc 11 15 (-$Rga -$Rga $zmax)
+    arc 10 14 (-$Ra  -$Ra  $zmax)
+
+    //block3 arc
+    arc 1 13 (-$Rga $Rga $zmin)
+    arc 0 12 (-$Ra  $Ra  $zmin)
+    arc 5 15 (-$Rga $Rga $zmax)
+    arc 4 14 (-$Ra  $Ra  $zmax)
+);
+
+
+
+boundary
+(
+    wall
+    {
+        type wall;
+        faces
+        (  
+           //block0 
+           (0 3 4 7) 
+           //block1
+           (3 8 7 10)
+           //block2
+           (8 12 10 14)
+           //block3
+           (0 12 4 14)
+        );
+    }
+
+    freestream
+    {
+        type patch;
+        faces
+        (
+            (9 11 15 13)
+            (15 13 5 1)
+            (1 5 6 2)
+            (2 6 11 9)
+        );
+    }
+
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 1 2 3)
+            (2 3 8 9)
+            (8 9 13 12)
+            (13 12 0 1)
+            (4 5 6 7)
+            (6 7 10 11)
+            (15 11 10 14)
+            (15 14 4 5)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+
+// ************************************************************************* //
