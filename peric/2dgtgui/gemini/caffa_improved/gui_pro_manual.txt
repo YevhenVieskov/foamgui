@@ -1,0 +1,37 @@
+How to Use the Pro Interface:
+
+    Launch: Run python caffa_pro.py.
+
+    Scene Creation:
+
+        Right-click on "Scenes" in the tree -> "New Vector Scene".
+
+        Right-click on "Derived Parts" -> "New Plane Section".
+
+        Right-click on "Derived Parts" -> "New Streamline".
+
+    Visual Setup:
+
+        Click on your new "Streamline 1" in the tree.
+
+        In Properties (bottom-left), adjust "Seed Points" to 20.
+
+    Run Simulation:
+
+        Click Run in the toolbar.
+
+        Watch Magic: The mock solver starts a vortex shedding simulation.
+
+        Switch tabs to see Pressure waves in the Scalar Scene.
+
+        Switch to your Vector Scene to see arrows dancing.
+
+        The Streamlines and Slices update live as the flow evolves.
+
+    Edit While Running:
+
+        While the solver runs, click on "Slice 1".
+
+        Change the "Origin X" value. The slice moves instantly in the 3D view while the solution continues to animate on the new slice location.
+
+This implementation provides the "Full STAR-CCM+ UX polish" requested, with a robust architecture for handling derived parts and live data injection.

@@ -1,0 +1,91 @@
+This directory contains several computer codes for solving 
+two-dimensional heat and fluid flow problems using Cartesian
+grids. At present, the following files are included:
+
+1. GRID.F    A code for generating Cartesian grids (multigrid version).
+             The solution domain is split into several subdomains in 
+             each direction; within each subdomain, the grid may expand
+             or contract, and one can specify either the expansion 
+             ratio or the size of one CV at the begining of an interval.
+             One can generate any grid level first, and the levels above
+             and below will be generated automatically (e.g. if one
+             wants 5 CV in one direction on the coarsest grid and a
+             symmetric expanding/contracting grid about centerline for
+             all finer grids, one can generate the second, symmetric
+             grid with 10 CV first; the coarser grid will then have one
+             big CV in the center and smaller CVs on either side). See
+             comments in the code. Compile, run, and follow instructions.
+
+2. GRID.INP  An example of input data for the above code (input data can
+             be either entered on request or prepared on a file; also, an
+             echo file is created which can be used later for repeated
+             grid generation).
+  
+             One can compile and execute the grid generatiode as follows
+             (if the Fortran compiler is f77):
+
+	     f77 grid.f -o gg
+	     gg 
+
+	     One needs to enter the name of the input file: 
+
+	     grid.inp
+
+	     If you want to create a new grid by entering datavia keyboard, enter
+
+	     *
+
+	     instead of file name. You can also edit the file grid.inp to
+             createa differentgrid.
+
+
+3. PCOL.F    A code which employs the SIMPLE-based pressure-correction
+             method for solving the Navier-Stokes equations using Finite
+             Volume method, Cartesian grid, and a colocated arrangement of
+             variables. The code has been structured and written in a way
+             which allows easy extension to non-orthogonal grids (a version
+             of such a code is available in directory 2DGL). The notation
+             follows by large the one used in Chapter 8. The code is set
+             up for solving lid-driven and buoyancy-driven flow in a closed
+             cavity. One can choose between upwind and central differences
+             for convective terms, and between implicit Euler and implicit
+             three time levels for time integration. Diffusive terms are
+             approximated using central differences. ILU solver after
+             Stone (SIP) is used for solving linear equation systems. There
+             are many comments in the code which describe all steps and
+             major variables, as well as the meaning of input data. It was
+             used to solve problems described in Sect. 8.4.1 and 8.4.2. File names
+             for input, output, grid, and results have to be typed in on
+             request (or provided on a file to which standard input is
+             re-directed); an eample of input file is provided.
+
+4. PCOL.INP  An example of input data for PCOL.F (here for the unsteady
+             lid-driven cavity flow).
+
+5. PLOT.F    A code which produces plots of grid, velocity vectors, profiles
+             of velocity components or temperature, contours of pressure,
+             temperature or streamlines, and colour filled contours for
+             pressure, temperature or streamfunction. In case of multigrid
+             or unsteady problems, files with several data sets can be
+             processed; each plot is saved as a separate file, which
+             carries the name (e.g. VECT for velocity vectors) and data
+             set number for easy identification. File names and number
+             of data sets are to be typed on request; the rest of input
+             data should be preparaed on an input file. The code is full
+             of comments describing the individual steps; it can easily
+             be adapted for interactive use and screen output under
+             windows or X11; postscript was chosen here since it is
+             hardware-independent.
+
+16. PLOT.INP An example of input data for ploting velocity vectors from 
+             four data sets resulting from an unsteady flow simulation.
+             This file needs to be adapted to each test case, depending on
+             which quantities are to be ploted. See comments in the code
+             describing input data.
+
+A multigrid version of PCOL.F, which was announced earlier, has still not
+been provided. However, there is a multigrid version of the CAFFA.F code,
+see directory 2DGL/MG, which is written for structured non-orthogonal
+grids and a code for Cartesian grids would only be a special (simplified)
+version of this code.
+

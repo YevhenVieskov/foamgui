@@ -1,0 +1,7 @@
+           1           1           1       LPLOT,KG1,NGIT 
+           1   NSUB 
+   0.000000      6.40000       20   Xstrt, Xend, Number of cells in x-dir.
+    1.00000       G                 Expansion factor in x-direction
+           1   NSUB 
+   0.000000       0.100000      5   Ystart, Yend, Number of cells in y-dir.
+   1.00000       G                  Expansion factor in y-direction

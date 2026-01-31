@@ -1,0 +1,36 @@
+name: Fortran CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    # Test on multiple operating systems
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        # Test with different compilers or versions
+        compiler: [gcc, intel]
+        # Exclude Intel compiler on macOS runners as it's typically unavailable
+        exclude:
+          - os: macos-latest
+            compiler: intel
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Fortran compiler
+      # Use the community-maintained action from fortran-lang
+      uses: fortran-lang/setup-fortran@v1
+      with:
+        compiler: ${{ matrix.compiler }}
+
+    - name: Compile and run tests
+      # Example commands to build and run tests using the configured compiler
+      # The 'fc' environment variable will point to the Fortran compiler executable
+      run: |
+        ${{ steps.setup-fortran.outputs.fc }} your_program.f90 -o your_program
+        ./your_program
+      # Add commands specific to fpm if you are using it
+      # run: fpm build && fpm test

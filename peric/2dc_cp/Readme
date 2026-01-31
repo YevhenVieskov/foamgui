@@ -1,0 +1,50 @@
+List of files:
+
+grid.f:
+
+A code for generating 2D Cartesian grids with a prescribed contraction or expansion coefficient. Se Readme-files in the directory 2dc.
+
+dgchan:  Input file grid.f
+
+
+pcol1.f:   
+
+Code for solving the Navier-Stokes equations on 2D Cartesian grids, set up for the laminar channel flow with inlet at the west boundary, outlet at the east boundary, symmetry at the south boundary and wall at the north boundary. Discretization of convection terms: UDS or CDS. Discretization of diffusion terms: CDS (assuming linear variation of variables).
+
+pcol2.f:   
+
+Code for solving the Navier-Stokes equations on 2D Cartesian grids, set up for the laminar channel flow with inlet at the west boundary, outlet at the east boundary, symmetry at the south boundary and wall at the north boundary. Discretization of convection terms: UDS or CDS. Discretization of diffusion terms: CDS (assuming quadratic variation of U with y).
+
+dcchan:
+
+Input file for flow solvers.
+
+GridAllUniform:
+
+Grid file to be read by the flow solver, set up for a uniform grid in all directions, 20 x 5 cells.
+
+GridXnonuniform:
+
+Grid file to be read by the flow solver, set up for a uniform grid in Y-direction and non-uniform in X-direction, 23 x 5 cells (3 columns of cells from uniform grid were split into two columns each).
+
+GridYnonuniform:
+
+Grid file to be read by the flow solver, set up for a uniform grid in X-direction and non-uniform in Y-direction, 20 x 7 cells (2 rows of cells from uniform grid were split into two rows each).
+
+ChannelAllUniform.pdf:
+
+A comparison of wall shear stress at the north boundary, computed on the all-uniform grid with the two code versions. When a linear variation of velocity is assumed, the gradient dU/dy at the north boundary becomes a backward-difference of 1st-order. The overall solution is still converging with 2nd-order (the error in shear stress is reducing ba a factor 4 when cells are halved), but it is never exact. When the quadratic variation of U with y is assumed and dU/dy at wall is computed from a parabola fit to 3 points (wall face center, cell center next to wall and cell center below it), the approximation of the gradient is exact if the exact solution varies quadratically, irrespective of grid fineness. This is the case for laminar flow between two parallel plates or in a pipe, and with this approximation, exact solution is obtained on any grid. The grid used here has only 5 cells between symmetry plane and wall, and the computed shear stress is exactly -0.03 Pa (the analytical solution for selected geometry and fluid properties).
+The expression for the first derivative at a boundary in terms of variable values at three locations along the line normal to boundary is given in Sect. 3.7.1 (bottom of page 56 of the 4th English edition and top of page 64 of the 2nd German edition). Equivalent expressions for inner cell faces are easily derived and can be deduced from coded expressions i subroutine CALCUV, below comment "Explicit diffusion fluxes...". In the code, coefficient matrix is built with simple approximations basedn on linear profile assumptions, because these approximations refer only to the nearest neighbors of node P. Explicitly computed difference between fluxes based on quadratic and linear profile assumption is addedd to the source term as a deferred correction.
+
+ChannelNonUnifX.pdf:
+
+A comparison of wall shear stress at the north boundary, computed on the grid with a uniform spacing in y-direction but non-uniform in x-direction. The result is the same as for uniform grids, because velocities do not vary in x-direction, so dU/dx and dV/dx are both zero and the assumption of a linear profile is as good as the assumption of quadratic variation. Pressure varies linearly in x-direction and thus the assumption of linear variation is exact.
+
+ChannelNonUnifY.pdf:
+
+A comparison of wall shear stress at the north boundary, computed on the grid with a uniform spacing in x-direction but non-uniform in y-direction. The assumption of linear variation of U in y-direction is still exact at internal faces when the grid is uniform, becasue a secant through two points on either side has the same slope as the tangent; however, when the grid is non-uniform, the approximation (dU/dy)_n = (U_N - U_P)/(y_N - y_P) is no longer exact. When the approximation of (dU/dy)_n is derived from a parabola passed through P, N and NN nodes, it is exact on any grid. The wall shear stress is again -0.03 pa, i.e. equal to the analytical solution.
+
+A more detailed description of discretization of diffusion fluxes based on the assumption of a quadratic variation of variables will be provided as a pdf-document.
+
+
+Milovan Peric, February 2022
