@@ -1,0 +1,25 @@
+openfoam-gui/
+├── core/
+│   ├── solvers/
+│   ├── mesh/
+│   ├── case/
+│   ├── validation/
+│   └── runtime/
+├── gui/
+│   ├── main_window.py
+│   ├── case_tree.py
+│   ├── blockmesh_editor.py
+│   ├── snappy_editor.py
+│   ├── cfmesh_editor.py
+│   ├── solver_editor.py
+│   ├── residuals_view.py
+│   └── contours_view.py
+├── vtk_rendering/
+├── tests/
+│   ├── unit/
+│   ├── functional/
+│   ├── gui/
+│   └── performance/
+├── examples/
+├── installer/
+└── main.py
