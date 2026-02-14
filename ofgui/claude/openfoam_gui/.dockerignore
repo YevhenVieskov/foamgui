@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Case files (large)
+*/constant/polyMesh/
+*/processor*/
+*.foam
+
+# Git
+.git/
+.gitignore
+
+# Documentation source (keep built docs)
+*.md.backup
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/

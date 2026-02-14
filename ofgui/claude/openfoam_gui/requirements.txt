@@ -1,0 +1,27 @@
+# OpenFOAM GUI Requirements
+
+# GUI Framework
+PyQt6>=6.5.0
+PyQt6-Qt6>=6.5.0
+
+# 3D Visualization
+pyvista>=0.42.0
+pyvistaqt>=0.11.0
+vtk>=9.2.0
+
+# Scientific Computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Plotting
+matplotlib>=3.7.0
+
+# Testing
+pytest>=7.4.0
+pytest-qt>=4.2.0
+pytest-cov>=4.1.0
+
+# Development
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.4.0

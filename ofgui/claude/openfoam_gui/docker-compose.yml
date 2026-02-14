@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  openfoam-gui:
+    build: .
+    image: openfoam-gui:latest
+    container_name: openfoam-gui
+    
+    # Enable GUI display
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - OPENFOAM_PATH=/opt/openfoam2506
+    
+    volumes:
+      # X11 socket for GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      
+      # Mount cases directory
+      - ./cases:/home/openfoam/cases:rw
+      
+      # Mount user config (optional)
+      - ~/.openfoam_gui:/home/openfoam/.openfoam_gui:rw
+    
+    # Network mode for X11
+    network_mode: host
+    
+    # Device access for GPU (optional)
+    devices:
+      - /dev/dri:/dev/dri
+    
+    # Security options for X11
+    security_opt:
+      - seccomp:unconfined
+    
+    # Resource limits (adjust as needed)
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+    
+    # Keep container running
+    tty: true
+    stdin_open: true
+    
+    # Restart policy
+    restart: unless-stopped
+
+# Optionally add a service for ParaView
+  paraview:
+    image: openfoamplus/of_v2106_centos73
+    container_name: paraview
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./cases:/home/openfoam/cases:ro
+    network_mode: host
+    command: paraview
+    profiles:
+      - paraview
