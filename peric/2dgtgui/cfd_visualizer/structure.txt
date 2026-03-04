@@ -1,0 +1,17 @@
+caffa_visualizer/
+├── main.py
+├── gui/
+│   ├── __init__.py
+│   ├── main_window.py
+│   ├── visualization_widget.py
+│   ├── residual_plot.py
+│   ├── data_loader.py
+│   └── caffa_parser.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_caffa_parser.py
+│   ├── test_data_loader.py
+│   ├── test_visualization.py
+│   └── test_residual_plot.py
+├── requirements.txt
+└── README.md

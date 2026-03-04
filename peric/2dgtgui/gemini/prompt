@@ -1,1 +1,1 @@
-  Write Star CCM+ like GUI   for uploaded file caffa.f, user.f. Use information from uploaded Readme. Write GUI with pyvista, pyqt,  python vtk. Write unit and functional test 
+  Write Star CCM+ like GUI   for uploaded file caffa.f, user.f. Use information from uploaded Readme. Write GUI with pyvistaqt, qtpy, pyvista, pyqt,  python vtk. Code must have residual plots as Star CCM+. Write visualisation like   Star CCM+ with Vector Scene, Plane sections, pressure and velocity contours. Write unit and functional test 
