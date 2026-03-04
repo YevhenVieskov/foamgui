@@ -1,0 +1,2 @@
+[dev-dependencies]
+fortuno = { git = "https://github.com/fortuno-repos/fortuno-fpm-serial.git" }

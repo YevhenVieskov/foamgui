@@ -1,0 +1,36 @@
+name: Fortran CI with Fortuno
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    name: Build & Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Test across Linux, macOS, and Windows
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Fortran Compiler
+        uses: fortran-lang/setup-fortran@v1
+        id: setup-fortran
+        with:
+          compiler: gcc
+          version: 12
+
+      - name: Setup Fortran Package Manager (fpm)
+        uses: fortran-lang/setup-fpm@v5
+        with:
+          fpm-version: 'latest'
+
+      - name: Run Fortuno Tests
+        run: fpm test

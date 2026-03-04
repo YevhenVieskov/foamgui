@@ -1,0 +1,54 @@
+name: Fortran CI with pFUnit
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  # Define the pFUnit version and where it should be installed
+  PFUNIT_VERSION: 4.6.1 
+  PFUNIT_DIR: ${{ github.workspace }}/pfunit-install
+
+jobs:
+  build-and-test:
+    name: Build & Test (Ubuntu)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies (gfortran, cmake, python)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gfortran cmake python3
+
+      - name: Cache pFUnit Installation
+        id: cache-pfunit
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.PFUNIT_DIR }}
+          key: ${{ runner.os }}-pfunit-${{ env.PFUNIT_VERSION }}
+
+      - name: Build and Install pFUnit
+        # Only run this step if the cache wasn't found
+        if: steps.cache-pfunit.outputs.cache-hit != 'true'
+        run: |
+          git clone --branch v${{ env.PFUNIT_VERSION }} https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git
+          mkdir pFUnit/build && cd pFUnit/build
+          # Build serial pFUnit (skip MPI for standard unit tests)
+          cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.PFUNIT_DIR }} -DSKIP_MPI=YES
+          make -j2 install
+
+      - name: Build Application and Tests
+        run: |
+          mkdir build && cd build
+          # Point your project's CMake to the cached pFUnit installation
+          cmake .. -DCMAKE_PREFIX_PATH=${{ env.PFUNIT_DIR }}
+          make -j2
+
+      - name: Run CTest
+        working-directory: build
+        run: ctest --output-on-failure
