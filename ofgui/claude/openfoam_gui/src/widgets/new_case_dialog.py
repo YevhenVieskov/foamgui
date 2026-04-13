@@ -1,5 +1,5 @@
 """New case creation dialog"""
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFormLayout, QLineEdit,
+from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QFormLayout, QLineEdit,
                               QPushButton, QFileDialog, QComboBox, QDialogButtonBox)
 from pathlib import Path
 

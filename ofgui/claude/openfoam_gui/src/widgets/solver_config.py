@@ -1,5 +1,5 @@
 """Solver configuration widget"""
-from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QGroupBox,
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QGroupBox,
                               QComboBox, QLabel, QTabWidget, QFormLayout,
                               QSpinBox, QDoubleSpinBox, QCheckBox, QLineEdit)
 from solvers.solver_registry import SolverRegistry

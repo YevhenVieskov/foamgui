@@ -1,6 +1,6 @@
 """Case tree widget for browsing OpenFOAM case structure"""
-from PyQt6.QtWidgets import QTreeWidget, QTreeWidgetItem
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem
+from PyQt5.QtCore import Qt
 from pathlib import Path
 
 

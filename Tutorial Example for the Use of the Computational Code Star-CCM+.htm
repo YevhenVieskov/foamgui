@@ -1,0 +1,701 @@
+<html><head><div style="display: none;"></div>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Tutorial Example for the Use of the Computational Code Star-CCM+</title>
+</head>
+
+<body bgcolor="#C0C0C0">
+
+<p align="center"><font size="5"><u>Tutorial Example for the Use of the Computational Code<br>
+Star-CCM+</u></font></p>
+
+<p>This tutorial example is designed to be self-standing and requires no
+ previous familiarity with Star-CCM+. It is very similar to the <i>Steady Flow: Backward Facing Step</i> tutorial in the Tutorial Guide (accessed in the <b>Help</b>
+ menu).  It is strongly recommended that you familiarize with the 
+location of buttons on the user interface, by going through the 
+appropriate sections of the Star-CCM+ Tutorials and the User Guide. In 
+particular, you should try the <i>Introduction</i> tutorial to familiarize yourself with the user interface and process of running a simulation.  See <a href="https://by.genie.uottawa.ca/~mcg3341/ComputationalAssignment/GettingStarted_StarCCM.htm">Getting Started with Star-CCM+</a> for more information on accessing the Star-CCM+ tutorial guide.</p>
+
+<p><b><u>PROBLEM</u></b>: Compute incompressible, viscous, air flow through a circular pipe section containing an orifice plate.<br>
+<br>
+<b><u>
+Problem specifications<br>
+</u></b>
+Consider a circular pipe section containing an orifice plate as shown in
+ the figure below. Air enters the section with a uniform inlet velocity.
+ Geometrical, material and kinematic specifications are given in the 
+table below.&nbsp;<br>
+<br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/1OrificePlate.gif" width="541" height="239">
+<p>&nbsp;</p>
+</center>
+<p></p>
+
+<table border="1" width="100%" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+  <td align="center">
+    <p><b><u>Variable</u></b></p>
+  </td>
+  <td align="center">
+    <p><b><u>Value</u></b></p>
+  </td>
+  <td align="center">
+    <p><b><u>Description</u></b></p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p>D</p>
+  </td>
+  <td align="center">
+    <p>4 cm</p>
+  </td>
+  <td align="center">
+    <p>Duct diameter</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p>d</p>
+  </td>
+  <td align="center">
+    <p>2 cm</p>
+  </td>
+  <td align="center">
+    <p>Orifice diameter</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p>E</p>
+  </td>
+  <td align="center">
+    <p>1 cm</p>
+  </td>
+  <td align="center">
+    <p>Orifice thickness</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p>L<sub>u</sub></p>
+  </td>
+  <td align="center">
+    <p>4 cm</p>
+  </td>
+  <td align="center">
+    <p>Upstream duct length</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p>L<sub>d</sub></p>
+  </td>
+  <td align="center">
+    <p>5 cm</p>
+  </td>
+  <td align="center">
+    <p>Downstream duct length</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p>uniform profile</p>
+  </td>
+  <td align="center">
+    <p>0.0001 m/s</p>
+  </td>
+  <td align="center">
+    <p>Inlet velocity</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p><font face="Symbol"><i>r</i></font></p>
+  </td>
+  <td align="center">
+    <p>1.2 kg/m<sup>3</sup></p>
+  </td>
+  <td align="center">
+    <p>Air density</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p><font face="Symbol"><i>m</i></font></p>
+  </td>
+  <td align="center">
+    <p>1.8E-5 Pa-s</p>
+  </td>
+  <td align="center">
+    <p>Air viscosity</p>
+  </td>
+  </tr>
+  <tr>
+  <td align="center">
+    <p>Re=<font face="Symbol"><i>r</i></font>u<sub>mean</sub>D/<font face="Symbol"><i>m</i></font></p>
+  </td>
+  <td align="center">
+    <p>0.133</p>
+  </td>
+  <td align="center">
+    <p>Reynolds number</p>
+  </td>
+  </tr>
+</tbody></table>
+
+
+
+<br><hr>
+<br>
+<p><font size="4"><b><u>Step 1.  Start a new simulation</u></b></font><i>
+<br>
+</i>Follow instructions here to launch the program:  <a href="https://by.genie.uottawa.ca/~mcg3341/ComputationalAssignment/GettingStarted_StarCCM.htm">Getting Started with Star-CCM+</a>.  Be sure to use the <i>Power-On-Demand Key</i> that was emailed to you.
+<br>
+<br>
+<b>Save</b> the new simulation as <i>probOrificePlate</i> (with .sim extension)
+<br>
+<br>
+</p>
+
+
+
+<br><hr>
+
+<p><font size="4"><b><u>Step 2.  Sketch the profile</u></b></font>
+<br>
+In the model window, expand the <b>Geometry</b> node and right click on the <b>3D-CAD Models</b> node and select <b>new</b>.
+<br>
+<br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig3.gif">
+<p>&nbsp;</p>
+</center>
+
+In the model window (3D-CAD tab), expand and right click the <b>Features &gt; XY</b> node and select  <b>Create Sketch</b>.  window.
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig4.gif">
+<p>&nbsp;</p>
+</center>
+
+<i>Note</i> the display options that appear under the edit tab in the model.  Click the Click the Show Grid button <img src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig5_showGrid.gif">  under Display Options to toggle the grid on/off
+<br><br>
+Click the Grid Spacing button <img src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig6_gridSpacing.gif">
+ under Display Options and change to 0.01m and click OK.  Zoom in and 
+out by clicking on the display window and using the mouse wheel.
+
+
+<br><br>
+Draw the sketch shown below (ensuring that "snap" is on).  To turn "snap" on, use the Snap to Grid button <img src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig7_snap.gif"> under Display Options in the model window.  Use the Create a Line button <img src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig8_createLine.gif">
+ under Create Sketch Entities to create your line segments freehand, 
+snapping to the grid at approximately the right locations.  <i>Note</i> that you can take advantage of symmetry here.  You only need to model half of the domain since we are assuming <i>axisymmetric</i>
+ flow.  Also you do not have to get the dimensions perfect at this 
+point.  We will add constraints to the lines and fix the lengths in the 
+next step.  Your window should look like this:
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig9.gif" width="500" height="500">
+<p>&nbsp;</p>
+</center>
+
+Now create constraints to fix the position, dimensions, and angles of all the lines.
+To start, right click the lower left corner of the drawing, and click <b>Apply Fixation Constraint</b>.
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig10.gif">
+<p>&nbsp;</p>
+</center>
+
+Now right click in the middle of each line segment and click <b>Apply Horizontal/Vertical Constraint</b> to each and every line.  This will force the lines to be either horizontal or vertical.  Then repeat the procedure to <b>Apply Length Dimension</b>, useful fixing the length of each line segment.
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig11.gif">
+<p>&nbsp;</p>
+</center>
+
+To check the lengths of each line segment, left click on each line, and 
+check the Length under the Line Properties window.  Make sure each 
+length matches the specification of the tutorial.  You can also double 
+check the active constraint for each line in this window.
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig12.gif">
+<p>&nbsp;</p>
+</center>
+
+<u>Alternatively</u>, you can right click each line segment and click <b>Apply Length Dimension</b>
+ and edit the line length on screen.  This is useful if you intend on 
+running multiple simulations with different blockage ratios.
+<br><br>
+Your final drawing should look like this when complete:
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig13.gif">
+<p>&nbsp;</p>
+</center>
+
+Click <b>OK</b> and <b>save</b> your work!
+
+
+<br><hr>
+
+<p><font size="4"><b><u>Step 3.  Extrude the profile</u></b></font>
+<br>
+Right click the <b>Features &gt; Sketch 1</b> node and select  <b>Create Extrude</b>
+
+<br>
+<br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig14.png">
+<p>&nbsp;</p>
+</center>
+
+
+Set the distance box to 0.005m (something small).  For now our object 
+will be 3D, but it will be converted to 2D later.  Rotate with the mouse
+ to preview then click <b>OK</b> to generate. The model should now appear in the <b>Bodies &gt; Body 1</b> node.  Right click the <b>Body 1</b> node and Rename to <b>orifice_plate</b>.  
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig15.gif" width="800" height="600">
+<p>&nbsp;</p>
+</center>
+
+<hr>
+<p><font size="4"><b><u>Step 4.  Specify the boundary face names.</u></b></font>
+<br>
+Right click the left most face of the model and <b>Rename</b> to "Inlet"
+
+<br>
+<br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig16.gif">
+<p>&nbsp;</p>
+</center>
+
+Right click the remaining faces indicated in the figure below and name 
+them accordingly.  Note the side faces will not be named right now.  
+They will show up later as <i>Default</i>.
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig17_faces.gif" width="600" height="200">
+<p>&nbsp;</p>
+</center>
+
+Each of these faces should now appear in the <b>Bodies &gt; orifice_plate &gt; Named Faces</b> node as shown below
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig18.gif">
+<p>&nbsp;</p>
+</center>
+
+
+Click <b>Close 3D-CAD</b> button and then <b>Save</b> your work.
+<br>
+<br><hr>
+
+
+<p><font size="4"><b><u>Step 5.  Creating a Region to Model.</u></b></font>
+<br>
+Right click the <b>Geometry &gt; 3D-CAD Models &gt; 3D-CAD Model 1 &gt; Bodies &gt; orifice_plate</b> node and select <b>New Geometry Part</b>.  Click <b>OK</b> in the next window without changing any settings.
+
+<br>
+<br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig19.gif">
+<p>&nbsp;</p>
+</center>
+
+Right <b>Geometry &gt; Parts &gt; orifice_plate</b> and select <b>Assign Parts to Region</b>.   
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig20.gif">
+<p>&nbsp;</p>
+</center>
+
+
+Make sure you select <b>Create a Region for Each Part</b> and <b>Create a Boundary for Each Part Surface</b> before clicking <b>Apply</b> and <b>Close</b>.
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig21.gif">
+<p>&nbsp;</p>
+</center>
+
+To visualize your region, right click the <b>Scenes</b> node and select <b>New Scene &gt; Geometry</b>.
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig22.gif">
+<p>&nbsp;</p>
+</center>
+
+
+<i>Note</i> the boundaries will also show up in in <b>Regions &gt; orifice_plate &gt; Boundaries</b>.  Your screen should look like:
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig23.gif">
+<p>&nbsp;</p>
+</center>
+
+<b>Save</b> your work!.
+
+
+
+<hr>
+<p><font size="4"><b><u>Step 6.  Creating Boundary Conditions.</u></b></font>
+<br>
+Select the <b>Regions &gt; orifice_plate &gt; Boundary &gt; Inlet</b> node and set the Type to <b>Velocity Inlet</b>
+
+<br><br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig24.gif">
+<p>&nbsp;</p>
+</center>
+
+Select the <b>Outlet</b> node and set the Type to <b>Pressure Outlet</b>
+<br><br>
+Select the <b>Axis</b> node and set the Type to <b>Axis</b>
+<br><br>
+Select the <b>Default</b> node and set the type to <b>Symmetry Plane</b>.  The rest of the boundaries will remain as <b>Wall</b> type.
+
+<br><br>
+<b>Save</b>.
+
+
+<hr>
+
+<p><font size="4"><b><u>Step 7.  Creating the Mesh.</u></b></font>
+<br>
+Generate a volume mesh using the trimmer mesher.  Right-click the <b>Continua</b> node and select <b>New &gt; Mesh Continuum</b>
+
+<br><br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig25.gif">
+<p>&nbsp;</p>
+</center>
+
+Right-click the <b>Mesh 1 &gt; Models</b> node and choose <b>Select Meshing Models</b>
+
+<br><br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig26.gif">
+<p>&nbsp;</p>
+</center>
+
+
+In the Meshing Model Selection dialog select <b>Surface Remesher</b> from the Surface Mesh box and <b>Trimmer</b> from the Volume Mesh box.  The window should look like the image below.  click <b>Close</b> when finished.
+
+<br><br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig27.gif">
+<p>&nbsp;</p>
+</center>
+
+
+To edit the base size of each grid, select the <b>Mesh 1 &gt; Reference Values &gt; Base Size</b> node and set the Value to 0.002 m.  <i>Note</i>,
+ this is fairly coarse.  Decreasing this value will result in a more 
+accurate solution, but will take longer to compute.  For your assignment
+ you will have to find the best grid size and type on your own.  It is a
+ good idea to try the <i>Steady Flow: Channel Flow with Multiple Meshes</i> tutorial in the Tutorial Guide to learn about different mesh types.  See <a href="https://by.genie.uottawa.ca/~mcg3341/ComputationalAssignment/GettingStarted_StarCCM.htm">Getting Started with Star-CCM+</a> for instructions on accessing the Star-CCM+ Tutorial Guide.
+
+
+<br><br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig29.gif">
+<p>&nbsp;</p>
+</center>
+
+
+<b>Save</b> the simulation.
+<br><br>
+
+
+
+<hr>
+
+<p><font size="4"><b><u>Step 8.  Generate the Mesh and Convert from 3D to 2D.</u></b></font>
+<br>
+Click the Generate Volume Mesh Button <img src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig32_mesh.gif">.  Then to visualize, create a Mesh scene by Right clicking the <b>Scenes</b> node and selecting <b>New Scene &gt; Mesh</b>
+
+<br><br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig33.gif">
+<p>&nbsp;</p>
+</center>
+
+Your grid should look like:
+
+
+
+<br><br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig33b.gif">
+<p>&nbsp;</p>
+</center>
+
+
+If you are satisfied with how the grid looks, now convert it to 2D.  Select <b>Mesh &gt; Convert to 2D</b> from the menu.
+
+<br><br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig34.gif">
+<p>&nbsp;</p>
+</center>
+
+Accept the default settings and click <b>OK</b>.  Click reset view <img src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig35_reset.gif"> to bring everything back into view.
+<br><br>
+
+This process creates a new region and physics model. Now we need to 
+disable the physics in the old region so that we only compute the 2D 
+solution.  To do this, Left-click the <b>Regions &gt; orifice_plate</b> node.  Change <b>Physics Continuum</b> to None.<br>
+
+
+<br><hr>
+<p><font size="4"><b><u>Step 9.  Selecting the Physics Models.</u></b></font>
+<br>
+Right-click the <b>Continua &gt; Physics 1 2D &gt; Models</b> node and choose <b>Select models</b>.
+
+<br><br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig36.gif">
+<p>&nbsp;</p>
+</center>
+
+Choose the following options: <b>Axisymmetric</b>, <b>Steady</b>, <b>Gas</b>, <b>Coupled Flow</b>, <b>Constant Density</b>, <b>Laminar</b>.
+  Your window should then look like the image below.  For your 
+assignment, you can pick the k-epsilon turbulence model instead of 
+laminar here.  For more information, see the Star-CCM+ Tutorial and User
+ Guides, particularly the <i>Introduction</i> tutorial.  See <a href="https://by.genie.uottawa.ca/~mcg3341/ComputationalAssignment/GettingStarted_StarCCM.htm">Getting Started with Star-CCM+</a> for instructions on accessing the Tutorial Guide.  Click <b>Close</b>
+
+<br><br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig37.gif">
+<p>&nbsp;</p>
+</center>
+
+
+
+
+
+<br><hr>
+<p><font size="4"><b><u>Step 10.  Selecting the Material Properties, Initial Conditions, and Boundary Condition Values.</u></b></font>
+<br>
+Select <b>Continua &gt; Physics 1 2D &gt;  Models &gt; Gas &gt; Air &gt; Material Properties &gt; Density &gt; Constant</b> node and set the <b>Value</b> to 1.2 kg/m^3
+
+<br><br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig38.gif">
+<p>&nbsp;</p>
+</center>
+
+Similarly, Select <b>Continua &gt; Physics 1 2D &gt;  Models &gt; Gas &gt; Air &gt; Material Properties &gt; Dynamic Viscosity &gt; Constant</b> node and set the <b>Value</b> to 1.8E-5 Pa-s.
+
+<br><br>
+Next, Select the <b>Continua &gt; Physics 1 2D  &gt; Initial Conditions &gt; Velocity &gt; Constant</b> node and set the <b>Value</b> to [1.0E-4, 0.0, 0.0] m/s.
+
+<br><br>
+For the Inlet condition, open the <b>Regions &gt; orifice_plate 2D &gt; Boundaries &gt; Inlet &gt; Physics Values &gt; Velocity Magnitude &gt; Constant</b> node and set the <b>Value</b> to 1E-4 m/s.
+<br>
+
+
+<br><hr>
+<p><font size="4"><b><u>Step 11.  Run the Simulation.</u></b></font>
+<br>
+Set the number of iterations under <b>Stopping Criteria &gt; Maximum Steps</b>.  Set its value to 500.
+
+<br><br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig42.gif">
+<p>&nbsp;</p>
+</center>
+
+
+Run the simulation with the Run button: <img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig43_run.gif">.
+  Your screen should look like this after some time passes, indicating a
+ converged solution (i.e. errors should be minimized with larger number 
+of iterations):
+
+<br><br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig44.gif">
+<p>&nbsp;</p>
+</center>
+
+<i>Note</i>, you can always stop the simulation process with the Stop <img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig50_stop.gif"> button, and examine the current solution.  You can then change the <b>Stopping Criteria</b> if desired and continue running from the current iteration with the Run <img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig43_run.gif"> button.  To clear your solution to start from the beginning, Click on the <b>Solution</b> menu item and click <b>Clear Solution</b>.<br>
+
+To get the CPU run time, right click on the <b>Reports</b> node and click on <b>New Report &gt; Total Solver CPU Time</b>.    A new node will appear under reports.<b>Reports &gt; Total Solver CPU Time</b>   Double clicking this node will output the CPU run time in the output window.
+
+
+<br><hr>
+<p><font size="4"><b><u>Step 12.  Visualize the Results.</u></b></font>
+<br>
+
+To show the velocity vectors, which indicates direction of fluid motion, right click <b>Scenes</b> node and select <b>New Scene &gt; Vector</b>.  By default it should show velocity vectors:
+<br>
+<br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig45.gif">
+<p>&nbsp;</p>
+</center>
+
+
+You can change the size of the vector arrows by opening the <b>Scenes &gt; Vector Scene 1 &gt; Displayers &gt; Vector 1 &gt; Glyph &gt; Relative Length</b> node and changing the <b>Glyph Length</b> to 10%.  Your scene should then look like:
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig46.gif">
+<p>&nbsp;</p>
+</center>
+
+
+For a pressure contour plot, right click <b>Scenes</b> node and select <b>New Scene &gt; Scalar</b>.  Then right click the blue bar that appears on the screen and select <b>Pressure</b>.  You can also plot other various properties like x-velocity or y-velocity, or total velocity using this method.
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig47.gif">
+<p>&nbsp;</p>
+</center>
+
+Finally, you can save your scenes to png image files by right clicking on the desired Scene node, and clicking on <b>Hardcopy</b>.
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/fig54.gif">
+<p>&nbsp;</p>
+</center>
+
+
+<b>Save</b>.
+
+
+
+
+<br><hr>
+<a name="ExtractingData"></a>
+<p><font size="4"><b><u>Step 13.  Extracting data from the simulation.</u></b></font>
+<br>
+
+
+
+
+
+A useful step for comparing different grid sizes, is to extract useful 
+information like pressure along the axis of the pipe.  To do this, you 
+must create a probe line along the axis, then make a plot of the data.  
+Start by right clicking on the <b>Derived Parts</b> node and select <b>New Part &gt; Probe &gt; Line...</b>. 
+
+<br>
+<br></p><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe1.gif">
+<p>&nbsp;</p>
+</center>
+
+This brings up a window where you can choose the start and end locations
+ of the line probe. Choose Point 1 to start at the origin [x=0.0m, 
+z=0.0m, z=0.0m] and Point 2 should end near the outlet.  In this 
+example, point 2 should be at [x=0.1m, z=0.0m, z=0.0m].  If you have a 
+Scene open in the right window, it should show you where the end points 
+of the probe line will be:
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe2.gif">
+<p>&nbsp;</p>
+</center>
+
+Click <b>Create</b> then <b>Close</b>.  Your probe line should be visible on the screen:
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe3.gif">
+<p>&nbsp;</p>
+</center>
+
+Now left click on the new <b>Derived parts &gt; line probe</b> node and make sure your 2D region is selected in the <b>Parts</b> property.  You can select what region and surface is probed by clicking the <b>...</b> button under :
+
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe4.gif">
+<p>&nbsp;</p>
+</center>
+
+Doing so brings up a Parts window, where you can de-select the 3D region, and select the 2D region as shown, then click <b>OK</b>:
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe5.gif">
+<p>&nbsp;</p>
+</center>
+
+
+Now we have to create the plot.  Do this by right clicking on the <b>Plots</b> bode and select <b>New Plot &gt; X-Y</b>.
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe6.gif">
+<p>&nbsp;</p>
+</center>
+
+
+This creates a new <b>XY Plot 1</b> node under the <b>Plots</b> node.  Left click the <b>XY Plot 1</b> node and make sure it is plotting for the <b>line-probe</b> we just created.  To do this, click the <b>...</b> button under the  property:
+
+
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe7.gif">
+<p>&nbsp;</p>
+</center>
+
+
+This brings up the Parts window again.  Make sure <b>Derived Parts &gt; line-probe</b> is selected as shown, then click <b>OK</b>:
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe8.gif">
+<p>&nbsp;</p>
+</center>
+
+By default the X-axis will plot distance.  We still have to specify what to plot on the Y-axis.  Open up the <b>Plots &gt; XY Plot 1 &gt; Y Types &gt; Y Type 1 &gt; Scalar</b> node as shown.  Left click on the <b>Scalar</b> node and change the type to <b>Pressure</b> as shown:
+
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe9.gif">
+<p>&nbsp;</p>
+</center>
+
+
+This should create a plot for you that looks like the image below.  You 
+can customize your plot and export data by exploring options in the <b>Plots &gt; XY Plot 1</b> node tree.  Now you can compare pressure profiles for different simulations!
+
+
+<br>
+<br><center>
+<img border="0" src="Tutorial%20Example%20for%20the%20Use%20of%20the%20Computational%20Code%20Star-CCM+_files/probe10.gif">
+<p>&nbsp;</p>
+</center>
+
+
+
+
+<b>Save</b> and now you are done and ready to start working on your assignment!  Also note, it is a good idea to <i>save your simulation as a different filename</i>
+ when you change the grid size or inlet velocity.  That way you can open
+ up your old simulations at any time to extract information without 
+having to re-run them.
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+
+</body></html>

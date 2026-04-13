@@ -1,5 +1,5 @@
 """Mesh generation panel widget"""
-from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QGroupBox,
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QGroupBox,
                               QPushButton, QTabWidget, QTextEdit, QLabel, QComboBox)
 
 

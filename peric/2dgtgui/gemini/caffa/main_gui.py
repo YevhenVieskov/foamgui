@@ -1,11 +1,11 @@
 import sys
 import numpy as np
-from PyQt6.QtWidgets import (QApplication, QMainWindow, QDockWidget, QTreeWidget, 
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QDockWidget, QTreeWidget, 
                              QTreeWidgetItem, QVBoxLayout, QWidget, QGroupBox, 
                              QFormLayout, QDoubleSpinBox, QSpinBox, QComboBox, 
                              QPushButton, QLabel, QSplitter, QFileDialog, QCheckBox, 
                              QMessageBox, QToolBar)
-from PyQt6.QtCore import Qt
+from PyQt5.QtCore import Qt
 from pyvistaqt import QtInteractor
 import pyvista as pv
 

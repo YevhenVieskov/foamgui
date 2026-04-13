@@ -1,0 +1,14 @@
+ cmake_minimum_required(VERSION 3.10)
+project(vts_io LANGUAGES Fortran)
+
+find_package(PFUNIT REQUIRED)
+
+# Add subroutine and test
+add_library(vts_writer write_vts.f90)
+target_compile_features(vts_writer PUBLIC c_std_11 fortran_std_2008)
+
+pfunit_add_test(
+  NAME test_vts
+  SOURCES test_vts_writer.f90
+  LINK_LIBRARIES vts_writer
+)

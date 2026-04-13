@@ -3,13 +3,13 @@ import subprocess
 import threading
 import time
 import numpy as np
-from PyQt6.QtWidgets import (QApplication, QMainWindow, QDockWidget, QTreeWidget, 
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QDockWidget, QTreeWidget, 
                              QTreeWidgetItem, QVBoxLayout, QWidget, QGroupBox, 
                              QFormLayout, QDoubleSpinBox, QSpinBox, QComboBox, 
                              QPushButton, QLabel, QSplitter, QFileDialog, QCheckBox, 
                              QMessageBox, QToolBar, QTableWidget, QTableWidgetItem,
                              QHeaderView)
-from PyQt6.QtCore import Qt, pyqtSignal, QObject
+from PyQt5.QtCore import Qt, pyqtSignal, QObject
 from pyvistaqt import QtInteractor
 import pyvista as pv
 

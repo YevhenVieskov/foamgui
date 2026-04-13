@@ -1,11 +1,11 @@
 """
 Real-time contour visualization widget
 """
-from PyQt6.QtWidgets import (
+from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QLabel,
     QPushButton, QSlider, QCheckBox
 )
-from PyQt6.QtCore import QTimer, Qt
+from PyQt5.QtCore import QTimer, Qt
 import pyvista as pv
 from pyvistaqt import QtInteractor
 import numpy as np
@@ -247,8 +247,7 @@ class ContourViewerWidget(QWidget):
                     if line.strip() == ')':
                         break
                     # Parse point (x y z)
-                    coords = line.strip('()
- ').split()
+                    coords = line.strip('()').split()
                     if len(coords) == 3:
                         points.append([float(x) for x in coords])
         
@@ -290,8 +289,7 @@ class ContourViewerWidget(QWidget):
                             break
                         
                         # Try to parse value
-                        value_str = line.strip('()
- ;')
+                        value_str = line.strip('();')
                         if value_str:
                             if '(' in value_str:  # Vector
                                 vector_parts = value_str.strip('()').split()

@@ -1,14 +1,13 @@
 """
 Visual blockMesh editor - ICEM CFD style
 """
-from PyQt6.QtWidgets import (
+from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
     QLabel, QSpinBox, QDoubleSpinBox, QComboBox, QTableWidget,
     QTableWidgetItem, QSplitter, QGroupBox, QFormLayout, QToolBar,
-    QMessageBox, QFileDialog
+    QMessageBox, QFileDialog, QAction
 )
-from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QAction
+from PyQt5.QtCore import Qt, pyqtSignal
 import pyvista as pv
 from pyvistaqt import QtInteractor
 import numpy as np

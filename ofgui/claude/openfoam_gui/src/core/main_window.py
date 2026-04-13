@@ -1,13 +1,13 @@
 """
 Main application window
 """
-from PyQt6.QtWidgets import (
+from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QSplitter,
     QTabWidget, QMenuBar, QMenu, QToolBar, QStatusBar, QDockWidget,
-    QFileDialog, QMessageBox, QTreeWidget, QTreeWidgetItem
+    QFileDialog, QMessageBox, QTreeWidget, QTreeWidgetItem, QAction
 )
-from PyQt6.QtCore import Qt, QTimer, pyqtSignal
-from PyQt6.QtGui import QAction, QKeySequence
+from PyQt5.QtCore import Qt, QTimer, pyqtSignal
+from PyQt5.QtGui import  QKeySequence
 from pathlib import Path
 
 from widgets.case_tree import CaseTreeWidget

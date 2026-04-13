@@ -3,7 +3,7 @@
 Star CCM+ Like CFD Visualization GUI
 Main entry point for the application
 """
-"""
+
 import sys
 from qtpy.QtWidgets import QApplication
 from gui.main_window import CFDMainWindow
@@ -29,7 +29,7 @@ def main():
 
 if __name__ == '__main__':
     main()
-"""
+
 
 #!/usr/bin/env python3
 """

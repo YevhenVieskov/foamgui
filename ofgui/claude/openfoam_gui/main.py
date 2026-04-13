@@ -10,8 +10,8 @@ from pathlib import Path
 # Add src directory to path
 sys.path.insert(0, str(Path(__file__).parent / 'src'))
 
-from PyQt6.QtWidgets import QApplication
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import Qt
 from core.main_window import MainWindow
 from core.config import AppConfig
 
