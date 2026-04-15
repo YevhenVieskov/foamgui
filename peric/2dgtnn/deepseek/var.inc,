@@ -1,0 +1,29 @@
+C##########################################################
+C     var.inc - Solution variables
+C##########################################################
+      COMMON /VAR/ U(NXYA), V(NXYA), P(NXYA), T(NXYA),
+     *              TE(NXYA), ED(NXYA), GAMMA(NXYA), RETHETA(NXYA),
+     *              VIS(NXYA), DEN(NXYA), PO(NXYA), UO(NXYA),
+     *              VO(NXYA), TO(NXYA), TEO(NXYA), EDO(NXYA),
+     *              GAMMAO(NXYA), RETHETAO(NXYA), NUT(NXYA)
+     
+      COMMON /TURB/ PROD_K(NXYA), DEST_K(NXYA), BLEND1(NXYA),
+     *              BLEND2(NXYA), BLEND_ALPHA(NXYA), BLEND_BETA(NXYA),
+     *              BLEND_SIGMA_K(NXYA), BLEND_SIGMA_OMEGA(NXYA),
+     *              P_GAMMA_SRC(NXYA), E_GAMMA_SRC(NXYA),
+     *              GAMMA_SEP(NXYA), WDIST(NXYA), YPLUS(NXYA)
+     
+      COMMON /GRAD/ DUX(NXYA), DUY(NXYA), DVX(NXYA), DVY(NXYA),
+     *              DPX(NXYA), DPY(NXYA), DPKX(NXYA), DPKY(NXYA),
+     *              DPOMEGAX(NXYA), DPOMEGAY(NXYA),
+     *              DUGX(NXYA), DUGY(NXYA), DVGX(NXYA), DVGY(NXYA),
+     *              LIMITER(NXYA)
+     
+      COMMON /COEF/ AP(NXYA), AE(NXYA), AW(NXYA), AN(NXYA), AS(NXYA),
+     *              SU(NXYA), APR(NXYA), PP(NXYA)
+     
+      COMMON /GMRES_WORK/ VEC(NGM,NXYA), H(NGM+1,NGM), CS(NGM),
+     *                    SN(NGM), YVEC(NGM), G(NGM+1)
+     
+      COMMON /SCHEME/ FACE_U(NXYA), FACE_V(NXYA), FACE_T(NXYA),
+     *                FACE_K(NXYA), FACE_OMEGA(NXYA), FACE_GAMMA(NXYA)
