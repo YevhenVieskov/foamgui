@@ -1,0 +1,85 @@
+CODES FOR RANSE
+===============
+
+This directory contains two versions of the CAFFA-code which
+include turbulence models for high-Reynolds-number flows. 
+One version includes the standard k-epsilon model with wall
+functions; the corresponding files are in the sub-directory
+"keps". The other version includes the k-omega model of Wilcox;
+the files are in the sub-directory "komega". The codes are
+otherwise very similar to the laminar version, which is found 
+in the directory "2dgl"; both models were implemented by
+Martin Schmid, PhD student at the Institute of Shipbuilding
+in Hamburg. See the readme-file in the directory "2dgl" for
+more information on code structure and how to run it.
+
+The extensions are described through comments in the code;
+otherwise see Sect. 10.3.5 for a description of the k-epsilon
+and k-omega models (or the original references cited therein) and 
+the literature listed in the "readme"-file in the sub-directory
+"komega" for the k-omega model.
+
+In the sub-directory "examples" there are input files for
+some of the test cases already used for laminar flow
+computations. We have tested the "channel", "damdif", and
+"bfstep", but we cannot guarantee that the codes are bug-free,
+because it is not easy to test codes with turbulence models.
+In the case of laminar flows, there is a number of test cases
+with very accurate solutions, so we know exactly what we must
+get. With turbulence models, we may get similar results to
+someone else's in one or two test cases and still have a bug
+in the code... These codes are intended to provide an example
+of implementation of turbulence models in CFD codes and should 
+not be regarded as tools for solving practical problems...
+
+The parameters used in the input files for the test cases listed
+above are those which we suggest for general applications. They have not 
+been optimized in any sense and are rather conservative; the user
+may achieve a substantial improvement of convergence rates by 
+playing with the under-relaxation factors, but note that these
+are problem-dependent. In general, if the grid is orthogonal,
+one can use higher values of under-relaxation parameters for 
+U, V, K, etc. (but use always 0.1 to 0.2 for pressure). Also,
+central differencing will not work in general for k, eps or omega
+equations due to strong near-wall peaks; here one would need a local
+blending with UDS to avoid oscillations. This is a well-known
+technique which we have not implemented (only the global blending 
+with a fixed blending factor is implemented).
+See papers from aero-experts using TVD, MUSCLE, ENO and other
+bounded schemes and references cited in Chap. 10.
+
+In order to run the code for any of the examples, proceed as follows:
+
+- Create a directory for the example you want to compute and copy 
+  all files which start with example name to that directory (e.g.
+  all files channel.*);
+  
+- Make that directory your working directory. Compile the grid generation
+  code:
+         gfortran dir/grid.f -o grid
+  Here "dir" is the directory in which the grid generation code resides.
+  The compiler my issue warnings like this one:
+  
+  ../../grid.f:1360.33:
+
+        CALL DEFBC(5,K,NWT,NWALA,IJW,IJPW,IJW1,IJW2)                    
+                                 1
+  Warning: Actual argument contains too few elements for dummy argument 'ijb' (800/1000) at (1)
+  
+  This warning can be ignored.
+
+  
+- Execute the command "grid"; follow instructions regarding input. The grid
+  will be generated and a file "param.inc", which sets array dimensions for the 
+  flow solver, is generated. Copy this file to the directory "keps" or
+  "komega", depending on which code you want to use.
+  
+- Compile the flow solver:
+      gfortran dir/caffa.f -o caffa
+      
+  "dir" is again the directory in which the file "caffa.f" resides, e.g.
+  "../../keps"
+  
+- Execute the command "caffa" and give the name of the test case when prompted,
+  e.g. "chanel". You will obtain a number of new files: e.g., "chanel.out" containes printed results, "chanel.re1" are results in binary format for grid level 1 which can be used to re-start the computation etc. See readme-file in directory "2dgl/sg" for further details.
+
