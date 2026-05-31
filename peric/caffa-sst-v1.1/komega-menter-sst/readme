@@ -1,0 +1,27 @@
+======================================================================
+CAFFA -- Computer-Aided Fluid Flow Analysis; 
+I implemented SST model on CAFFA Version 1.3, June 1997, available in book by Ferziger&Peric.
+======================================================================
+
+This version contains Menter's k-omega SST turbulence model with Adaptive Wall
+Treatment of Menter&Esch. It is suitable for computation of high-Reynolds-number
+flows. (In eddy viscosity formulation I use S instead of $\Omega$, that is an updated version of the model.
+Also model coefficients are from the newer (2003) version.
+Output files are in Tecplot and VTK file formats.
+
+For a description of the model, see:
+
+1. Papers by Florian Menter 
+
+2. NASA Langley Turbulence modelling resource: http://turbulence.larc.nasa.gov/
+
+
+Send comments to:
+Nikola Mirkov
+nmirkov@vinca.rs
+
+
+Belgrade, June 2012
+
+
+

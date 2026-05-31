@@ -1,0 +1,2 @@
+#!/bin/bash
+gfortran -o caffa-sst -Wall -O3 -fno-align-commons caffa-sst.f

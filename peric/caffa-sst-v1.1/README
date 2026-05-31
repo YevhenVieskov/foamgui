@@ -1,0 +1,16 @@
+1) Unpack:
+$ tar -zxvf caffa-sst
+
+2) Enter folder with source code
+
+$ cd caffa-sst-v1.0
+$ cd komega-menter-sst
+
+3) Modify 'param.inc' file according to mesh you have created
+NOTE: By this stage you should have created the mesh with the program provided 
+in grid2d folder. 
+
+4) Compile:
+$ chmod +x make-caffa-sst
+$ make-caffa-sst
+$ ./caffa-sst

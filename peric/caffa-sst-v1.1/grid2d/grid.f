@@ -4,7 +4,7 @@ C#########################################################
 C     This code generates non-orthogonal body-fitted grids
 C     (one block only). The grid is automatically refined
 C     up to the number of grid levels prescribed. This
-C     version includes C- and O-type grids. See
+C     version includes C- and O-type grids. See 
 C     readme-file for a description.
 C
 C     This is Version 1.3 of the code, December 1996.
@@ -14,8 +14,9 @@ C     parties, provided that an acknowledgement to the
 C     source of the original version is retained.
 C
 C                M. Peric, Hamburg, 1996
-C                Milovan.Peric@t-online.de
+C                peric@schiffbau.uni-hamburg.de
 C=========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'logico.ing'
@@ -113,13 +114,19 @@ C
       NWT=MAX(NWT,1)
       NOCT=MAX(NOCT,1)
 C
+      WRITE(9,'(a30)') '      INTEGER    NGR,NXA,     '
+      WRITE(9,'(a30)') '     *           NYA,NMXY,    '
+      WRITE(9,'(a30)') '     *           NXYA,NXYG,   '
+      WRITE(9,'(a30)') '     *           NIA,NOA,     '
+      WRITE(9,'(a30)') '     *           NSA,NWA,     '
+      WRITE(9,'(a30)') '     *           NOCA,NFI     '
       WRITE(9,99) '      PARAMETER (NGR= ',NGR, ',NXA=  ',NIAL,','
       WRITE(9,99) '     *           NYA= ',NJAL,',NMXY= ',NMIJ,','
       WRITE(9,99) '     *           NXYA=',NIJA,',NXYG= ',NXYG,','
       WRITE(9,99) '     *           NIA= ',NINA,',NOA=  ',NOT,','
       WRITE(9,99) '     *           NSA= ',NST, ',NWA=  ',NWT,','
       WRITE(9,99) '     *           NOCA=',NOCT,',NFI=7)'
-   99 FORMAT(A22,I5,A7,I5,A1)
+   99 FORMAT(A22,I6,A7,I6,A1)
 C
 C.....STORE GRID DATA
 C
@@ -151,8 +158,6 @@ C
 C.....PRINT GRID DATA
 C
       IF(LPRINT) CALL PRINTX
-
-      CALL WRITVTS(K, "grid")
 C
       CLOSE(UNIT=1)
       CLOSE(UNIT=2)
@@ -168,6 +173,7 @@ C######################################################
 C######################################################
 C     This routine generates the coarsest grid.
 C======================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'logico.ing'
@@ -181,7 +187,7 @@ C
       PRINT *,' ENTER> NUMBER OF GRID LEVELS, NGR:  '
       READ(5,*) NGR
       PRINT *,' SELECTION OF STRAIGHT LINES: 0 -> S-N, 1 -> W-E:  '
-      READ(5,*) IDIR
+      READ(5,*) IDIR 
       WRITE(1,*) LSTORE,LCALG,LPRINT,LPLOT,LAXIS,
      *        '  LSTORE,LCALG,LPRINT,LPLOT,LAXIS'
       WRITE(1,*) NGR,' NGR'
@@ -250,7 +256,7 @@ C
         Y(IJ)=Y(IJ)*SCF
       END DO
 C
-      RETURN
+      RETURN                                   
       END
 C
 C
@@ -264,13 +270,14 @@ C##########################################################
 C
 C
 C##########################################################
-      SUBROUTINE BGRID
+      SUBROUTINE BGRID 
 C##########################################################
 C     This routine generates grid points along solution
 C     domain boundaries. Boundaries are subdivided into
 C     line segments (straight, circle, or arbitrary); data
 C     is provided for each line interactivly.
 C==========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'lines.ing'
@@ -307,7 +314,7 @@ C
         READ(5,*) XLS,YLS
         WRITE(1,*) XLS,YLS,'  XLS,YLS'
 C
-C.....COORD. OF LINE END
+C.....COORD. OF LINE END 
 C
         DO LL=1,NLINES(L)
           PRINT *,' COORDINATES OF LINE ',LL,'  END:  '
@@ -334,7 +341,7 @@ C.....STRAIGHT LINE: CALCULATE COORD. OF BOUNDARY GRID POINTS
 C
           IF(LTYP.EQ.1) CALL STRLINE(L)
 C
-C.....CIRCLE LINES: DEFINE CIRCLE SEGMENT AND CALCULATE GRID COORD.
+C.....CIRCLE LINES: DEFINE CIRCLE SEGMENT AND CALCULATE GRID COORD. 
 C
           IF(LTYP.EQ.2) THEN
             PRINT *,' ENTER COORDINATES OF A THIRD POINT ON CIRCLE;'
@@ -390,6 +397,7 @@ C############################################################
 C############################################################
 C     This routine deals with straight lines.
 C============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'lines.ing'
@@ -413,6 +421,7 @@ C##########################################################
 C##########################################################
 C     This routine assignes line points to boundary points.
 C==========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'lines.ing'
@@ -465,6 +474,7 @@ C############################################################
 C############################################################
 C     This routine deals with lines which are circle segments.
 C============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'lines.ing'
@@ -497,13 +507,13 @@ C
         RCC=SQRT((XCC-XLS)**2+(YCC-YLS)**2)
       ENDIF
 C
-      XYL=ABS(FIE-FIS)
+      XYL=ABS(FIE-FIS)      
 C
 C.....CALCULATE COORDINATES OF GRID POINTS ALONG THE LINE
 C
       CALL DIVLINE(XYL)
 C
-C.....ASSIGN LINE POINTS TO GRID POINTS
+C.....ASSIGN LINE POINTS TO GRID POINTS 
 C
       CALL SETPT(L,IE,IS,JE,JS)
 C
@@ -514,7 +524,7 @@ C
       ISCIR(NCIR)=IS
       JECIR(NCIR)=JE
       IECIR(NCIR)=IE
-      RCIR(NCIR)=RCC
+      RCIR(NCIR)=RCC     
       XCCIR(NCIR)=XCC
       YCCIR(NCIR)=YCC
 C
@@ -525,9 +535,10 @@ C
 C############################################################
       SUBROUTINE ARBLINE(L)
 C############################################################
-C     This routine deals with arbitrary lines which are
+C     This routine deals with arbitrary lines which are 
 C     defined by specifying coordinates of each point.
 C============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'lines.ing'
       INCLUDE 'circl.ing'
@@ -563,6 +574,7 @@ C     This routine subdivides a line into a specified
 C     number of segments and creates coordinates of points
 C     along the line.
 C=========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'lines.ing'
       INCLUDE 'circl.ing'
@@ -601,7 +613,7 @@ C
         SUML=SUML+DL(I-1)
         FD(I)=SUML*XYLR
       END DO
-      FD(NSEG+1)=1.0
+      FD(NSEG+1)=1.0 
 C
 C.....CALCULATE COORDINATES OF GRID POINTS FOR STRAIGHT LINES
 C
@@ -611,7 +623,7 @@ C
           YPT(I)=YLS+FD(I)*(YLE-YLS)
         END DO
 C
-C.....CALCULATE COORDINATES OF GRID POINTS FOR CIRCLE LINES
+C.....CALCULATE COORDINATES OF GRID POINTS FOR CIRCLE LINES 
 C
       ELSEIF(LTYP.EQ.2) THEN
         FIP=ATAN(1.)/45.
@@ -634,9 +646,10 @@ C########################################################
       SUBROUTINE EXPAND(XYL)
 C########################################################
 C     This routine calculates the expansion factor along
-C     a line when the size of the first segment is
+C     a line when the size of the first segment is 
 C     specified.
 C========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'lines.ing'
       FI(A,B,G,N)=A*G**N-B*G+B-A
@@ -647,7 +660,7 @@ C
       EMAX=2.
       EMIN=.5
       I=0
-C
+C 
 C.....CALC. AVERAGE DX AND DETERMINE WHETHER SUBDIVISION IS UNIFORM
 C
       AR=XYL/REAL(NSEG)
@@ -670,14 +683,14 @@ C.....CALCULATE EXPANSION RATIO USING INTERVAL HALVING METHOD
 C
         FI1=FI(DX1,XYL,E1,NSEG)
         FI2=FI(DX1,XYL,E2,NSEG)
-        IF(SIGN(1.,FI1).NE.SIGN(1.,FI2)) THEN
+        IF(SIGN(1.0D0,FI1).NE.SIGN(1.0D0,FI2)) THEN
 C
 C.....ITERATE UNTIL EXP IS FOUND WHICH FITS SPECIFIED DX1 AND XYL
 C
    10     I=I+1
           E=0.5*(E1+E2)
           FIP=FI(DX1,XYL,E,NSEG)
-          IF(SIGN(1.,FIP).EQ.SIGN(1.,FI2)) THEN
+          IF(SIGN(1.0D0,FIP).EQ.SIGN(1.0D0,FI2)) THEN
             E2=E
             FI2=FIP
           ELSE
@@ -705,12 +718,13 @@ C
 C
 C
 C###########################################################
-      SUBROUTINE CALXY(IDD)
+      SUBROUTINE CALXY(IDD) 
 C###########################################################
 C     This routine calculates the coordinates of grid points
-C     in the interior of the solution domain once the
+C     in the interior of the solution domain once the 
 C     coordinates of grid points along boundaries are known.
 C===========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'grid.ing'
@@ -805,6 +819,7 @@ C##########################################################
 C##########################################################
 C     This routine creates refined grid from a coarse grid.
 C==========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'lines.ing'
@@ -918,7 +933,7 @@ C
       END DO
 C
 C===============================================================
-C.....MODIFICATIONS ON CIRCLE LINES
+C.....MODIFICATIONS ON CIRCLE LINES  
 C===============================================================
 C
       IF(NCIR.NE.0) THEN
@@ -928,7 +943,7 @@ C
 C.....SCALE CENTER COORD. AND RADIUS
 C
         IF(K.EQ.2) THEN
-          RCIR(NC) =RCIR(NC)*SCF
+          RCIR(NC) =RCIR(NC)*SCF   
           XCCIR(NC)=XCCIR(NC)*SCF
           YCCIR(NC)=YCCIR(NC)*SCF
         ENDIF
@@ -973,7 +988,7 @@ C
         JSARB(L)=2*JSARB(L)-1
         JEARB(L)=2*JEARB(L)-1
 C
-C.....SMOOTHING OF BOUNDARY LINES
+C.....SMOOTHING OF BOUNDARY LINES 
 C
         IF(ISARB(L).EQ.IEARB(L)) THEN
           IJBEG=LI(IST+ISARB(L))+JSARB(L)+1
@@ -1031,10 +1046,11 @@ C
 C########################################################
       SUBROUTINE SMBL(IJS,IJE,INC)
 C########################################################
-C     This routine smooths boundary lines defined by
+C     This routine smooths boundary lines defined by 
 C     arbitrary points; now empty -- a spline interpolation
 C     should be implemented
 C========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'grid.ing'
 C
@@ -1047,6 +1063,7 @@ C########################################################
 C########################################################
 C     This routine smooths grid in the interior.
 C========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
 C
@@ -1070,13 +1087,14 @@ C########################################################
 C########################################################
 C     This routine adjusts coordinates of interior grid
 C     points to make the grid smoother. Two neighbor grid
-C     points (L and R) of point P are connected and an
+C     points (L and R) of point P are connected and an 
 C     auxilliary point is set on this line at a location
 C     corresponding to the position of P between L and R.
 C     The new grid point is put midway between the old
 C     location P and the auxilliary point. The points are
 C     moving inwards towards center of curvature.
 C========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'grid.ing'
       INCLUDE 'indexg.ing'
@@ -1134,6 +1152,7 @@ C########################################################
 C########################################################
 C     This routine calculates grid data for flow solver.
 C========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'grid.ing'
@@ -1229,10 +1248,10 @@ C
           YC(IJ)=0.25*(Y(IJ)+Y(IJ-1)+Y(IJ-NJ)+Y(IJ-NJ-1))
         END DO
         END DO
-C
-C==========================================================
+C 
+C==========================================================     
 C..... CALCULATION OF INTERPOLATION FACTORS
-C==========================================================
+C==========================================================     
 C
         DO I=2,NIM
         DO J=2,NJM
@@ -1259,7 +1278,7 @@ C
       END DO
 C
       RETURN
-      END
+      END    
 C
 C
 C###########################################################
@@ -1267,6 +1286,7 @@ C###########################################################
 C###########################################################
 C     This routine prints grid coordinates and other fields.
 C===========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       DIMENSION PHI(NXYA)
@@ -1298,6 +1318,7 @@ C##########################################################
 C##########################################################
 C     This routine sets some indices for the given grid.
 C==========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
 C
@@ -1318,6 +1339,7 @@ C############################################################
 C     This routine collects information about boundary cell
 C     faces of the same type.
 C============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'bound.ing'
@@ -1344,7 +1366,7 @@ C
         CALL DEFBC(2,K,NOT,NOUT,IJO,IJPO,IJO1,IJO2)
         NOT=NOT+NOUT(K)
 C
-C.....SYMMETRIY BOUNDARIES
+C.....SYMMETRY BOUNDARIES
 C
         ISS(K)=NST
         CALL DEFBC(3,K,NST,NSYM,IJS,IJPS,IJS1,IJS2)
@@ -1361,9 +1383,9 @@ C
         IWAS(K)=NWT
         CALL DEFBC(5,K,NWT,NWALA,IJW,IJPW,IJW1,IJW2)
         NWT=NWT+NWALA(K)
-        NWAL(K)=NWALI(K)+NWALA(K)
+        NWAL(K)=NWALI(K)+NWALA(K) 
 C
-C.....O-GRID & C-GRID CUTS
+C.....O-GRID & C-GRID CUTS 
 C
         IOCS(K)=NOCT
         CALL DEFOCB(K,NOCT,NOC)
@@ -1381,6 +1403,7 @@ C############################################################
 C     This routine prepares data about boundary conditions
 C     as required by the flow solver.
 C============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'bound.ing'
@@ -1450,7 +1473,7 @@ C
       RETURN
       END
 C
-C
+C               
 C############################################################
       SUBROUTINE DEFOCB(K,NBC,NB)
 C############################################################
@@ -1461,6 +1484,7 @@ C     performed; if another face with same cell face center
 C     is found, it is also flagged and one face is included
 C     in the list of interface faces.
 C============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'bound.ing'
@@ -1578,7 +1602,7 @@ C
       RETURN
       END
 C
-C
+C               
 C############################################################
       SUBROUTINE OCFIND(IJNB,XB,YB)
 C############################################################
@@ -1589,11 +1613,12 @@ C     has already been found by searching from the other side).
 C     XB and YB are the coordinates of cell-face center whose
 C     pair is beeing sought; XN and YN are the coordinates
 C     of cell-face center for the face being checked. If the
-C     two match within EPSREL of the cell-face length, they
+C     two match within EPSREL of the cell-face length, they 
 C     are assumed to match. The face being checked is labeled
 C     and the index of CV-center on the other side, IJNB, is
-C     returned to the calling routine.
+C     returned to the calling routine. 
 C============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'bound.ing'
@@ -1672,7 +1697,7 @@ C
       RETURN
       END
 C
-C
+C               
 C###########################################################
       SUBROUTINE SODW
 C###########################################################
@@ -1680,6 +1705,7 @@ C     This routine calculates components of the unit vector
 C     normal to wall boundary faces and area of that face
 C     divided by the distance of cell center to the wall.
 C===========================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'grid.ing'
       INCLUDE 'bound.ing'
@@ -1720,9 +1746,10 @@ C#############################################################
       SUBROUTINE SODS
 C#############################################################
 C     This routine calculates components of the unit vector
-C     parallel to symmetry boundary faces and area of that
+C     parallel to symmetry boundary faces and area of that 
 C     face divided by the distance of cell center to boundary.
 C=============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'grid.ing'
       INCLUDE 'bound.ing'
@@ -1764,6 +1791,7 @@ C#############################################################
 C#############################################################
 C     This routine prints some parameters about the grid.
 C=============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'grid.ing'
       INCLUDE 'indexg.ing'
@@ -1781,7 +1809,7 @@ C
         CALL SETIND(K)
 C
 C.....SOUTH SIDE
-C
+C   
         WRITE(2,*) '   SOUTH SIDE:'
         WRITE(2,*) '  '
 C
@@ -1797,7 +1825,7 @@ C
         WRITE(2,*) '  '
 C
 C.....NORTH SIDE
-C
+C   
         WRITE(2,*) '   NORTH SIDE:'
         WRITE(2,*) '  '
 C
@@ -1811,7 +1839,7 @@ C
         WRITE(2,*) '  '
 C
 C.....WEST SIDE
-C
+C   
         WRITE(2,*) '   WEST SIDE:'
         WRITE(2,*) '  '
 C
@@ -1827,7 +1855,7 @@ C
         WRITE(2,*) '  '
 C
 C.....EAST SIDE
-C
+C   
         WRITE(2,*) '   EAST SIDE:'
         WRITE(2,*) '  '
 C
@@ -1967,6 +1995,7 @@ C#############################################################
 C#############################################################
 C     This routine plots the grids in postscript format.
 C=============================================================
+      IMPLICIT REAL*8 (A-H,O-Z)
       INCLUDE 'param.ing'
       INCLUDE 'indexg.ing'
       INCLUDE 'grid.ing'
@@ -2104,78 +2133,4 @@ C==========================================================
       WRITE(7,*) '1 setlinecap 1 setlinejoin '
       RETURN
       END
-
-C##########################################################
-      SUBROUTINE WRITVTS(K, FILNAM)
-C##########################################################
-C     Writes the grid at refinement level K to VTK XML
-C     StructuredGrid format (*.vts). 2-D grid is written
-C     with k-extent = 0..0 and z = 0.0 for all points.
-C     Points are ordered exactly as required by VTK:
-C       i (our I-direction) varies fastest, then j (our J-direction).
-C     Compatible with the existing GRGEN code (F77 style).
-C     Uses ASCII output for simplicity and portability.
-C
-C     Call example (add after grid generation if desired):
-C       CALL WRITVTS(NGR, 'finest_grid.vts')
-C
-C     M. Peric style, April 2026
-C==========================================================
-      INCLUDE 'param.ing'
-      INCLUDE 'indexg.ing'
-      INCLUDE 'grid.ing'
-C
-      CHARACTER*(*) FILNAM
-      INTEGER K
-      INTEGER I, J, IJ
-      REAL XX, YY, ZZ
-C
-C.....Set indices for requested grid level
-      CALL SETIND(K)
-C
-C.....Open output file
-      OPEN (UNIT=10, FILE=FILNAM, STATUS='UNKNOWN', FORM='FORMATTED')
-      REWIND 10
-C
-C.....VTK XML header
-      WRITE(10,'(A)') '<?xml version="1.0"?>'
-      WRITE(10,'(A)') '<VTKFile type="StructuredGrid" version="0.1"'
-      WRITE(10,'(A)') '         byte_order="LittleEndian"'
-      WRITE(10,'(A)') '         header_type="UInt32">'
-      WRITE(10,'(A,I5,A,I5,A)') '  <StructuredGrid WholeExtent="0 ',
-     *                           NI-1,' 0 ',NJ-1,' 0 0">'
-      WRITE(10,'(A,I5,A,I5,A)') '    <Piece Extent="0 ',NI-1,
-     *                           ' 0 ',NJ-1,' 0 0">'
-C
-C.....Points section
-      WRITE(10,'(A)') '      <Points>'
-      WRITE(10,'(A)') '        <DataArray type="Float32"'
-      WRITE(10,'(A)') '                   NumberOfComponents="3"'
-      WRITE(10,'(A)') '                   format="ascii">'
-C
-C.....Write points in VTK order: outer loop J (slow), inner loop I (fast)
-C     Storage order in GRGEN is J-fastest, therefore we transpose the loops
-      DO J = 1, NJ
-        DO I = 1, NI
-          IJ = LI(I + IST) + J
-          XX = X(IJ)
-          YY = Y(IJ)
-          ZZ = 0.0
-          WRITE(10,'(3(1PE15.7))') XX, YY, ZZ
-        END DO
-      END DO
-C
-      WRITE(10,'(A)') '        </DataArray>'
-      WRITE(10,'(A)') '      </Points>'
-C
-C.....Close tags
-      WRITE(10,'(A)') '    </Piece>'
-      WRITE(10,'(A)') '  </StructuredGrid>'
-      WRITE(10,'(A)') '</VTKFile>'
-C
-      CLOSE (UNIT=10)
-C
-      RETURN
-      END
-
 
